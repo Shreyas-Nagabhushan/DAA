@@ -75,14 +75,27 @@ do
 
 return dp[N]
 
+algo opt(j)
+
+low <- 0 
+hight <- j-1 
+while low <= high do 
+    mid = low+high // 2 
+    if jobs[mid].endtime > jobs[j].starttime then 
+        high = mid - 1 
+    else 
+        if jobs[mid+1].endtime <= jobs[j].starttime then
+            low = mid+1 
+        else
+            return mid 
+        end if 
+    end if 
+end while 
+return -1 
+
 ________________________________
 
 algo subsetsum(array, target)
-
-for k <- 1 to target 
-do 
-    dp[k][0] <- 0 
-end for 
 
 for i <- 1 to N do
     for j<- 1 to target do 
@@ -96,5 +109,20 @@ end for
 
 return dp[N][target]
 
+________________________________
+
+algo knapsack(items, capacity)
+
+for i <- 1 to N do
+    for j<- 1 to capacity do 
+        if items[i].weight <= j then 
+            dp[i][j] = max( dp[i-1][j] , items[i].weight + dp[i-1][j - items[i].weight] )
+        else 
+            dp[i][j] = dp[i-1][j]
+        end if 
+    end for 
+end for 
+
+return dp[N][capacity]
     
 

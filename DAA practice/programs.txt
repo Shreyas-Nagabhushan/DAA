@@ -4,4 +4,7 @@
 4)gale shapeley done
 5)kruskals done 
 6)weigted interval scheduling done 
-7)subset sum
+7)subset sum done 
+8)knapsack done 
+9)bellman
+10)n queens
