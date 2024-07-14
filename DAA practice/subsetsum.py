@@ -42,13 +42,12 @@ def subset_tabular(arr, target):
 
             dp[curr_index][curr_target] = max(choose, not_choose)
     
-    for row in dp:
-        print(row)
-
+    result = 'Subset sum possible ' if dp[len(dp)-1][target] == target else f'Closest possible sum is {dp[len(dp)-1][target]}'
+    print(result)
     chosen_items = [] 
 
     def find_solution(curr_target, curr_index):
-        if curr_target == 0:
+        if curr_index < 0 or curr_target == 0:
             return 
         if dp[curr_index][curr_target] > dp[curr_index - 1][curr_target]:
             chosen_items.append(curr_index - 1)
@@ -60,7 +59,7 @@ def subset_tabular(arr, target):
     print(chosen_items)
 
 
-arr = [5,1,7,2]
+arr = [5,1,7,4]
 target = 3
 # dp = [[-1 for _ in range(target + 1)] for _ in range(len(arr))]
 # print(f_dp(arr, len(arr)-1, 3, dp))
