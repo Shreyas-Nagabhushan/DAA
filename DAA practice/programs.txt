@@ -3,4 +3,5 @@
 3)dijkstras done 
 4)gale shapeley done
 5)kruskals done 
-6)weigted interval scheduling
+6)weigted interval scheduling done 
+7)subset sum

@@ -77,7 +77,24 @@ return dp[N]
 
 ________________________________
 
+algo subsetsum(array, target)
 
+for k <- 1 to target 
+do 
+    dp[k][0] <- 0 
+end for 
+
+for i <- 1 to N do
+    for j<- 1 to target do 
+        if array[i] <= j then 
+            dp[i][j] = max( dp[i-1][j] , array[i] + dp[i-1][j - array[i]] )
+        else 
+            dp[i][j] = dp[i-1][j]
+        end if 
+    end for 
+end for 
+
+return dp[N][target]
 
     
 
