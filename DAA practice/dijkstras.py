@@ -6,7 +6,6 @@ def push_heap(heap, item):
 def pop_heap(heap):
     return heapq.heappop(heap)
 
-
 def dijkstras(graph, src, destination):
     n = len(graph)
     distance = [float('inf') for _ in range(n)]
@@ -42,14 +41,6 @@ def dijkstras(graph, src, destination):
     
     get_path(destination)
     print(path)
-
-# graph = [
-#     [0, 1, 4, 0, 0],
-#     [0, 0, 4, 2, 0],
-#     [0, 0, 0, 3, 0],
-#     [0, 0, 0, 0, 3],
-#     [0, 0, 0, 0, 0]
-# ]
 
 def input_graph():
     n = int(input('Enter number of vertices: '))
