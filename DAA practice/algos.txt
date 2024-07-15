@@ -1,3 +1,31 @@
+alg mergesort(arr[a1...an])
+
+if len(arr) <= 1 then return arr 
+
+m <- len(arr) // 2 
+a1 <- arr[1 : m]
+a2 <- arr[m+1: n]
+a1 <- mergesort(a1)
+a2 <- mergesort(a2)
+return merge(a1, a2)
+
+alg merge(a, b)
+
+result <- {} 
+i, j <- 0 
+while i < len(a) and j < len(b) do 
+    if a[i] < b[j] then 
+        add a[i] to result 
+        i <- i+1
+    else 
+        add b[j] to result 
+        j <- j+1
+    end if 
+end while 
+add a[i:len(a)] to result 
+add b[j: len(b)] to result 
+________________________________
+
 alg quicksort(arr[a1...an])
 
 pivot = arr[0]
