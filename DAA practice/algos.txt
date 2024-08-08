@@ -172,6 +172,10 @@ algo relax(graph, dist)
 for edge in graph.edges do 
     if dist(edge.start) != inf then 
         dist(edge.end) = min(dist(edge.end) , dist(edge.start) + edge.weight)
+    end if 
+end for 
+
+end 
 
     
 ________________________________
@@ -187,4 +191,49 @@ for c: 1 to NumCols do
         board[row][c] = 1 // place a queen 
         nqueens(board, row+1) 
         board[row][c] = 0 // backtract i.e remove queen  
+    end if 
+end for 
 
+end 
+
+________________________________
+
+algorithm Prims(graph)
+
+mst_edges <- {} 
+mst_vertices <- 0 // arbitrary vertex 
+
+while len(mst_vertices) != N do 
+    min_edge <- (None, None, inf)
+    for vertex u in mst_vertices do 
+        for (v, weight) in graph[u] do 
+            if v not in mst_vertices and weight < min_edge[2] then 
+                min_edge <- (u, v, weight)
+            end if 
+        end for 
+    end for 
+
+    if min_edge[0] is not None then 
+        add min_edge to mst_edges 
+        add min_edge[1] to mst_vertices 
+    end if 
+end while 
+
+return mst_edges
+    
+________________________________
+
+algorithm MinimizeMaxLateness(jobs)
+
+sort jobs in ascending order of their deadlines
+curr_time <- 0 
+max_lateness <-  (-inf)
+intervals <- {} 
+
+for j in jobs do 
+    add (curr_time, curr_time + j.duration) to intervals
+    max_lateness = max(max_lateness, j.finish - j.deadline) 
+    curr_time <- curr_time + j.duration 
+end for 
+
+return (intervals, max_lateness)

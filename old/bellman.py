@@ -35,3 +35,5 @@ def input_graph():
 
 n, edges, src = input_graph()
 bellman(edges, n, src)
+
+#O(n * e) 

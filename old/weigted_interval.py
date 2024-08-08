@@ -26,7 +26,6 @@ def opt(jobs, j):
 
 def schedule(jobs):
     jobs.sort(key = lambda x : x[1])
-    print(jobs)
     dp = [0 for _ in range(len(jobs))]
     dp[0] = jobs[0][2]
     n = len(jobs)

@@ -1,0 +1,263 @@
+1)Stable Match
+
+Algorithm Gale-Shapeley(men_prefs, woman_prefs)
+// To find a set of stable mathces
+// Input: men and woman pref list
+// Output: A set of stable matches 
+
+    free_men <- {M1, M2, .... , Mn} // initially all men are free 
+    pairs <- {} // initially there are no stable pairs 
+
+    while some man is free and hasnt yet proposed to every other woman 
+    do 
+        proposer <- pop(free_men)
+        pref_list = men_prefs(proposer)
+
+        for all woman in pref_list do 
+            if woman not in pairs // if woman is not yet engaged
+            then 
+                add (proposer, woman) to pairs 
+            
+            else // if woman is engaged to some man 
+                current_partner <- pairs(woman) 
+                if woman prefer proposer over current_partner 
+                then 
+                    add current_partner to free_men 
+                    pairs(woman) <- proposer 
+                else 
+                    continue // woman rejects proposer 
+                endif 
+            endif 
+        endfor 
+    endwhile 
+
+    return pairs 
+END 
+
+2) Recursive DFS Algo 
+
+Algorithm DFS(G(V,E))
+// To do DFS traversal of a graph 
+// Input: Graph i.e set of vertices and edges 
+// Output: DFS traversal of a graph (and an array of pre and post visit times)
+
+    visited <- {}
+    clock <- 1 
+    pre <- {} // Time when a node was first discovered
+    post <- {}  // Time when we departed from a particular node i.e time when explored all possible nodes from a given node
+
+    for all node v belonging to V 
+    do 
+        visited(v) <- false // Initially all nodes are not visited 
+
+    for all node v belonging to V 
+    do 
+        if not visited(v) then 
+            explore(v) 
+        endif 
+    endfor 
+    return pre, post
+END
+
+Procedure explore(v)
+//Find all nodes reachable from v 
+    display(v)
+    visited(v) <- True 
+    pre(v) <- clock // Mark the time of first discovery of v
+    clock <- clock + 1 
+    for all edge (v, u) belonging to E 
+    do 
+        if not visited(u) then
+            explore(u)
+        endif 
+    endfor 
+    post(v) <- clock // Mark the time of the final departure from v
+    clock <- clock + 1 
+END 
+
+3) BFS
+
+NOTE: Ignore distance if graph is not weighted
+
+Algorithm BFS(G(V, E), source)
+//DO bfs traversal of Graph 
+//Input: Graph and source node (source BELONGING to V)
+//Output : BFS traversal of the graph( and distance to each vertex from source)
+
+    queue <- {source} // Implement queue using suitable Data structure
+    distance <- {inf, inf, ...., inf}
+    distance(source) <- 0             // initially distance to all nodes is infinity, except for source which is 0
+
+    while queue not empty
+    do 
+        u <- pop(queue)
+        display(u)
+        for all edges (u, v) belonging to E 
+        do
+            if distance(v) == inf then // if true then v is not yet visited 
+                distance(v) = distance(u) + cost(u, v) // OR just add 1 if cost is not there.
+                push v to queue 
+            end if 
+        end for 
+    end while 
+    return distance 
+END 
+
+
+4)Merge sort 
+
+Algorithm MergeSort(array)
+//Sort the array 
+// Input: an unsorted array
+// Output: sorted array 
+
+    if len(array) == 1 then   #array of size 1 is always sorted 
+        return array 
+    
+    #partition the array into two halves
+    m <- len(array) / 2
+    arrA = array[a0, a1, ...., am]
+    arrB = array[am+1, am+2, ....., an]
+
+    arrA <- MergeSort(arrA)
+    arrB <- MergeSort(arrB)
+
+    return Merge(arrA, arrB)
+
+Procedure Merge(arrA, arrB) 
+//Merge two sorted arrays into 1 sorted array 
+
+    result <- [] 
+    i <- 0 
+    j <- 0 
+    while i < len(arrA) and j < len(arrB) 
+    do 
+        if arrA[i] < arrB[j] then 
+            add arrA[i] to result 
+            i <- i + 1 
+        else 
+            add arrB[j] to result 
+            j <- j+1 
+            inversions <- inversions + len(arrA) - i 
+    add arrA[i : ] to result 
+    add arrB[j : ] to result 
+    return result 
+
+5)QuickSort 
+
+Algorithm QuickSort(array)
+// 
+// 
+// 
+    if len(array) == 1 then 
+        return array 
+    
+    pivot <- array[0] 
+    left <- {} 
+    right <- {} 
+    for all n belonging to array 
+    do 
+        if n < pivot then 
+            add n to left 
+        else 
+            add n to right 
+        end if 
+    end for 
+
+    left <- QuickSort(left) 
+    right <- QuickSort(right)
+    return left + {pivot} right 
+
+
+6)Dijkstras
+
+Algorithm Dijkstras(G(V, E), source)
+// 
+// 
+// 
+    distance <- {inf, inf, ...., inf} 
+    distance(source) <- 0 
+    explored <- {} 
+    parent <- {v1, v2, ...., vn}
+
+    while len(explored) != V 
+    do 
+        u <- find node u that does not belong to explored AND has minimum distance di 
+
+        for all edges (u, v) belonging to E 
+        do 
+            if v does not belong to explored then 
+                if distance(v) > distance(u) + cost(u, v) then 
+                    parent(v) <- u 
+                    distance(v) <- distance(u) + cost(u, v) 
+                end if 
+            end if 
+        end for 
+
+        add u to explored 
+    end while 
+
+    for all v belonging to V 
+    do 
+        displayPath(v) 
+    end for 
+END 
+
+Procedure displayPath(v)
+    if parent(v) == v then 
+        display(v)
+        return 
+    end if 
+
+    displayPath(parent(v))
+    display(v) 
+    return 
+END
+
+7) Prims 
+
+Algorithm Prims(Graph(V, E))
+// 
+// 
+// 
+    mstVertices <- {v0} // add some arbitraty vertex v to mstVertices
+    mstEdges <- {}
+    mstCost <- 0 
+
+    while len(mstVertices) != V 
+    do 
+        e <- find edge e connecting u and v such that u belongs to mstVertices AND v does NOT belong to mstVertices AND has minimum cost 
+
+        mstVertices <- mstVertices UNION v 
+        mstEdges <- mstEdges UNION e 
+        mstCost <- mstCost + cost(u, v) 
+    end while 
+
+8) Kruskals 
+Algorithm Kruskals(Graph(V, E))
+// 
+// 
+// 
+    mstEdges <- {} 
+    edges <- G(E) 
+    edges.sort() //sort edges in ascending order of weight 
+
+    for all edge belonging to edges
+    do 
+        if edge UNION mstEdges is acyclic then 
+            mstEdges <- mstEdges UNION edge 
+        end if 
+    end for 
+
+    return mstEdges 
+END 
+
+9) 
+
+
+
+
+
+
+
+
