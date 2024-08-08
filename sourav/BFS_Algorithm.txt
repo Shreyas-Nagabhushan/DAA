@@ -1,0 +1,17 @@
+Algorithm: BFS(graph, start):
+//Input: A graph with an adjacency matrix
+//Output: A sequence of vertices in bfs order
+
+    queue = []
+    visited = false for all n vertices
+
+    visited[start] = true
+    push start onto queue
+
+    while queue is not empty:
+        current = pop queue
+        print current
+
+        for each unvisited neighbour of current:
+            visited[neighbour] = true
+            push neighbour onto queue

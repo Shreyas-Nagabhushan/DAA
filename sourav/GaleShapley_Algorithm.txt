@@ -1,0 +1,21 @@
+Algorithm: GaleShapley(pref):
+//Input: Preference list of men and woman
+//Output: Set of couples
+
+    free_men = [list of all men]
+    couples = {}
+    while free_men:
+        proposer = first free man
+
+        for each woman in proposer's preference:
+            if woman is not paired:
+                add woman-proposer pair to couples
+            
+            else if proposer is preferred woman's current partner:
+                add woman's current partner to free_men
+                add woman-proposer pair to couples
+
+            remove woman from proposer's preference list
+    
+    return couples
+    

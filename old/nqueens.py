@@ -42,4 +42,4 @@ def nqueens(n):
     
     backtrack(board, 0)
 
-nqueens(4)
+nqueens(30)

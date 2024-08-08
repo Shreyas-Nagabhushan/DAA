@@ -1,0 +1,18 @@
+Algorithm: DFS(graph, start):
+//Input: A graph with an adjacency matrix
+//Output: A sequence of vertices in dfs order
+
+    stack = []
+    visited = false for all n vertices
+
+    visited[start] = true
+    push start onto stack
+
+    while stack is not empty:
+        current = pop stack
+        print current
+
+        for each unvisited neighbour of current:
+            visited[neighbour] = true
+            push neighbour onto stack
+     
