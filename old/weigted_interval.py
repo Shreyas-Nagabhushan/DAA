@@ -8,20 +8,26 @@ def input_jobs():
         jobs.append([s,e,d])
     return (n, jobs)
 
+# def opt(jobs, j):
+#     start_time = jobs[j][0]
+#     low = 0 
+#     high = j-1 
+#     while low <= high:
+#         mid = (low+high)//2
+#         end_time = jobs[mid][1]
+#         if end_time > start_time:
+#             high = mid-1
+#         else:
+#             if jobs[mid+1][1] <= start_time:
+#                 low = mid+1
+#             else:
+#                 return mid 
+#     return -1 
+
 def opt(jobs, j):
-    start_time = jobs[j][0]
-    low = 0 
-    high = j-1 
-    while low <= high:
-        mid = (low+high)//2
-        end_time = jobs[mid][1]
-        if end_time > start_time:
-            high = mid-1
-        else:
-            if jobs[mid+1][1] <= start_time:
-                low = mid+1
-            else:
-                return mid 
+    for i in range(-len(jobs), 0, 1):
+        if jobs[i][1] <= jobs[j][0]:
+            return i 
     return -1 
 
 def schedule(jobs):

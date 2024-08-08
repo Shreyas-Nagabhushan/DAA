@@ -26,9 +26,12 @@ def is_safe(board, i, j):
 
 def nqueens(n):
     board = [[0 for _ in range(n)] for _ in range(n)]
+    solutions = 0 
     
     def backtrack(board, row):
+        nonlocal solutions
         if row == len(board):
+            solutions += 1
             for i in board:
                 print(i)
             print()
@@ -41,5 +44,6 @@ def nqueens(n):
                 board[row][c] = 0 
     
     backtrack(board, 0)
+    print(solutions)
 
 nqueens(30)
